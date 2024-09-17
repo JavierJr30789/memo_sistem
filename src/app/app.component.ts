@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PruebaService } from './services/prueba.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from './models/usuarios';
+import { MatCardModule } from '@angular/material/card';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  imports: [
+    FormsModule,
+    MatCardModule,
+    
+  ],  //FormsModule es necesario para ngModel
   standalone: true,
   styleUrls: ['./app.component.css'],
 })

@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http'
 
 export class PruebaService {
 
-  private url = 'http://localhost/api'; // disponer url de su servidor que tiene las páginas PHP
+  private url = 'http://localhost:3000'; // disponer url de su servidor que tiene las páginas PHP
 
   constructor(private http: HttpClient) { }
 

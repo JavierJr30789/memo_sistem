@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
 host: "10.10.0.62",
 user: "desarrollo",
 password: "fisca1234",
-database: "SisInventarios",
+database: "GestionMemo",
 });
 
 app.get('/test-connection', (req, res)=> {
