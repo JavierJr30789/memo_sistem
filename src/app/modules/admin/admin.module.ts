@@ -2,22 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
-import { AgregarUsuariosComponent } from './components/agregar-usuarios/agregar-usuarios.component';
-import { EditarUsuariosComponent } from './components/editar-usuarios/editar-usuarios.component';
 import { AdminComponent } from './pages/admin/admin.component';
-
+import { FormsModule } from '@angular/forms';
+import { TableComponent } from './components/table/table.component';
+;
 
 @NgModule({
   declarations: [
-    ListarUsuariosComponent,
-    AgregarUsuariosComponent,
-    EditarUsuariosComponent,
-    AdminComponent
+
+    AdminComponent,
+     TableComponent
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    FormsModule,
+  
+  ],
+  exports: [
+    AdminComponent,
+    TableComponent
   ]
 })
 export class AdminModule { }
