@@ -3,9 +3,9 @@
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
   
   require("conexion.php");
-  $conn=ReturnConnection();
 
-  $registros=mysqli_query($conn,"IdUsuario, NombreUsuario, Mail, Clave FROM Usuarios WHERE IdUsuario =$_GET[IdUsuario]");
+
+  $registros=mysqli_query($con,"select IdUsuarios, IdGrupo, NombreUsuario, Mail, Clave from Usuarios where IdUsuario=$_GET[codigo]");
     
   if ($reg=mysqli_fetch_array($registros))  
   {

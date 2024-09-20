@@ -1,98 +1,92 @@
+<div>
+  <h2>Crear Usuario</h2>
+  <!-- Formulario que utiliza FormGroup (Reactive Forms) de Angular -->
+  <form [formGroup]="usuarioForm" (ngSubmit)="submitForm()">
+    <!-- El formGroup 'usuarioForm' está enlazado con el formulario. Cuando se envía el formulario, se ejecuta la función 'submitForm()' -->
 
-<mat-card>
-  <mat-card-title>Registro</mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="registerForm" (ngSubmit)="alta()">
-      <mat-form-field appearance="fill">
-        <mat-label>UserName</mat-label>
-        <input matInput formControlName="username" placeholder="Ingrese su nombre de usuario" >
-       
-      </mat-form-field>
+    <div>
+      <label for="NombreUsuario">Nombre:</label>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="Ingrese su email" >
-        
-      </mat-form-field>
+      <!-- Input que utiliza 'formControlName' para enlazar el campo 'NombreUsuario' del formulario reactivo -->
+      <input id="NombreUsuario" formControlName="NombreUsuario" type="text" />
 
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" placeholder="Ingrese su contraseña" >
-      
-      </mat-form-field>
+      <!-- Validación: si el campo es inválido y ha sido tocado, se muestra un mensaje de error -->
+      <div *ngIf="usuarioForm.get('NombreUsuario')?.invalid && usuarioForm.get('NombreUsuario')?.touched">
+        Nombre es requerido
+      </div>
+    </div>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid" (click)="alta()"> 
-        Registrar
-      </button>
-    </form>  
-  </mat-card-content>
-</mat-card>
+    <div>
+      <label for="Mail">Mail:</label>
+      <input id="Mail" formControlName="Mail" type="email" />
 
+      <!-- Validación: si el campo es inválido (por ejemplo, un formato de email incorrecto) y ha sido tocado, se muestra un mensaje de error -->
+      <div *ngIf="usuarioForm.get('Mail')?.invalid && usuarioForm.get('Mail')?.touched">
+        Ingresa un email válido
+      </div>
+    </div>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>Email</th>
-  </tr>
-  <tr>
-    <td>{{ user.IdUsuario }}</td>
-    <td>{{ user.Name }}</td>
-    <td>{{ user.Email }}</td>
-  </tr>
-</table>
+    <div>
+      <label for="Clave">Clave:</label>
+      <input id="Clave" formControlName="Clave" type="password" />
 
-  
-   <h1>Prueba de conexión a MySQL</h1>
-   <button (click)="testConnection()">Probar conexión a MySQL</button>
-   <p>{{ connectionStatus }}</p>
-   
-  
-     <!--*******************************************************************-->
-   <div class="container">
-     <h1>{{title}}</h1>
-     <div class="col-sm-7 float-left">
-       <table span="0" *NgIf="hayRegistros(); else sinarticulos" class="table table-borderless table-striped table-dark"  style=" border:0px; box-shadow:3px 3px 5px 4px rgba(0,0,0,0.25);">
-         <thead class="thead-dark" style="background:black; color:white;">
-           <tr>
-             <td>IdUsuario</td>
-             <td>Nombre</td>
-             <td>Correo</td>
-             <td>Acciones</td>
-           </tr>
-         </thead>
-         <tbody>
-           <tr *NgFor="let user of users">
-             <td>{{user.IdUsuario}}</td>
-             <td>{{user.Name}}</td>
-             <td>{{user.Email}}</td>
-             <td>{{user.Password}}</td>
-             <td><button class="btn btn-danger text-white" (click)="baja(user.IdUsuario)">Borrar</button>&nbsp;<button class="btn btn-info text-white" (click)="seleccionar(user.IdUsuario)">Seleccionar</button></td>
-           </tr>
-         </tbody>
-       </table>
-     </div>
-   
-     <ng-template #sinarticulos><p>No hay articulos.</p></ng-template>
-   
-   
-   <div class="card col-sm-4 p-2 float-right">
-     <p>
-       Nombre <input type="text" class="form-control m-1"type="text"  [(ngModel)]="user.Name"  placeholder="namaewa esponje bobu">
-     </p>
-     <p>
-       Correo <input type="email" class="form-control m-1"type="text" [(ngModel)]="user.Email" placeholder="shikamaru.nara@gmail.com">
-     </p>
-     <p>
-       Clave <input type="password" class="form-control m-1"type="text" [(ngModel)]="user.Password" placeholder="***********">
-     </p>
-     <div class="row">
-       <div class="col-sm-2 "> <p><button class="btn btn-outline-dark float-left" (click)="alta()" >Agregar</button></p>&nbsp;</div>
-       <div class="col-sm-2 offset-md-2"> <p><button class="btn btn-outline-dark float-right" (click)="modificacion()" >Modificar</button></p></div>
-     </div>
-    
-   </div>
-   
-   </div>
+      <!-- Validación: si la clave es inválida (por ejemplo, si tiene menos de 6 caracteres) y el campo ha sido tocado, se muestra un mensaje de error -->
+      <div *ngIf="usuarioForm.get('Clave')?.invalid && usuarioForm.get('Clave')?.touched">
+        La clave debe tener al menos 6 caracteres
+      </div>
+    </div>
 
+    <!-- Botón para enviar el formulario -->
+    <!-- Se deshabilita el botón si el formulario es inválido (por ejemplo, si no se han completado los campos obligatorios) -->
+    <button type="submit" [disabled]="usuarioForm.invalid">Enviar</button>
+  </form>
+
+  <h2>Usuarios Registrados</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>IdUsuarios</th>
+        <th>Nombre</th>
+        <th>Mail</th>
+        <th>Clave</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.IdUsuarios }}</td>
+        <td>{{ usuario.NombreUsuario }}</td>
+        <td>{{ usuario.Mail }}</td>
+        <td>{{ usuario.Clave }}</td>
+        <td>
+     
+        <!-- Botón para borrar el usuario -->
+        <button (click)="editarUsuario(usuario)">Modificar</button>
+        <button (click)="bajaUsuario(usuario.IdUsuarios)">Borrar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Formulario para modificar usuario, solo visible si se seleccionó un usuario para editar -->
+<form *ngIf="usuarioSeleccionado" [formGroup]="modificarUsuarioForm" (ngSubmit)="submitModificarForm()">
+  <div>
+    <label for="modificarNombre">Nombre:</label>
+    <input id="modificarNombre" formControlName="NombreUsuario" type="text" />
+  </div>
+
+  <div>
+    <label for="modificarMail">Mail:</label>
+    <input id="modificarMail" formControlName="Mail" type="email" />
+  </div>
+
+  <div>
+    <label for="modificarClave">Clave:</label>
+    <input id="modificarClave" formControlName="Clave" type="password" />
+  </div>
+
+  <button type="submit" [disabled]="modificarUsuarioForm.invalid">Guardar Cambios</button>
+</form>
+
+</div>
   

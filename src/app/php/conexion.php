@@ -1,47 +1,17 @@
-<?php 
+<?php
+$servername = "172.16.20.30";
+$username = "desarrollo";
+$password = "fisca1234";
+$dbname = "SisInventarios";
 
-header("Access-Control-Allow-Origin: *");
+try {
+    // Crear una nueva conexión PDO
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // Configurar el modo de error de PDO a excepción
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Error en la conexión: " . $e->getMessage();
+}
 
-header("Content-Type: application/json; charset=UTF-8");
-
-// Dates de la conexión a la base de datos
-function ReturnConnection(){
-
-  $host= "10.10.0.62";
-  
-  $db_name="GestionMemo";
-  
-  $username = "desarrollo";
-  
-  $password = "fisca1234";
-
-  $conn = new mysqli($host, $db_name, $username, $password);
-
-
-    // Verificar si hay algún error en la conexión
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
-  
-  // consulta SQL
-  
-  $query = "SELECT * FROM Usuarios";
-  
-  $stmt= $conn->prepare($query);
-  
-  $stmt->execute();
-  
-  // crean un array para almacenar los resultados
-  
-  $datos = array();
-  
-  while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-  $datos [] = $row;
-  }
-  
-  echo json_encode($datos);
-
-  return $conn;
-
-};
+// Cerrar la conexión (PDO la cierra automáticamente al final del script)
 ?>
