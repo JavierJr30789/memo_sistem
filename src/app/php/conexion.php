@@ -2,7 +2,7 @@
 $servername = "172.16.20.30";
 $username = "desarrollo";
 $password = "fisca1234";
-$dbname = "SisInventarios";
+$dbname = "GestionMemo";
 
 try {
     // Crear una nueva conexión PDO
