@@ -5,7 +5,7 @@
   require("conexion.php");
 
 
-  $registros=mysqli_query($con,"select IdUsuarios, IdGrupo, NombreUsuario, Mail, Clave from Usuarios where IdUsuario=$_GET[codigo]");
+  $registros=mysqli_query($con,"SELECT IdUsuarios, IdGrupo, NombreUsuario, Mail, Clave FROM Usuarios WHERE IdUsuario=$_GET[codigo]");
     
   if ($reg=mysqli_fetch_array($registros))  
   {

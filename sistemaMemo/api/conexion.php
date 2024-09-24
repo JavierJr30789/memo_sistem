@@ -1,8 +1,8 @@
 <?php
-$servername = "172.16.20.30";
-$username = "desarrollo";
-$password = "fisca1234";
-$dbname = "SisInventarios";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sistemamemo";
 
 try {
     // Crear una nueva conexión PDO

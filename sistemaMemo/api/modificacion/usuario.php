@@ -25,6 +25,8 @@ if (isset($params->NombreUsuario) && isset($params->Mail) && isset($params->IdUs
 
         $response = array("resultado" => "OK", "mensaje" => "Datos modificados");
     } catch (PDOException $e) {
+        // Registrar el error en un archivo de log
+        error_log("Error en la actualización: " . $e->getMessage());
         $response = array("resultado" => "ERROR", "mensaje" => "Error en la actualización: " . $e->getMessage());
     }
 } else {

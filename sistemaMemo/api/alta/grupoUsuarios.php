@@ -14,10 +14,9 @@ if ($params === null) {
 include("conexion.php");
 
 try {
-    $stmt = $conn->prepare("INSERT INTO Usuarios (NombreUsuario, Mail, Clave) VALUES (:NombreUsuario, :Mail, :Clave)");
-    $stmt->bindParam(':NombreUsuario', $params->NombreUsuario);
-    $stmt->bindParam(':Mail', $params->Mail);
-    $stmt->bindParam(':Clave', $params->Clave);
+    $stmt = $conn->prepare("INSERT INTO grupousuarios (descripcion) VALUES (:descripcion)");
+    $stmt->bindParam(':idGrupo', $params->idGrupo);
+    $stmt->bindParam(':descripcion', $params->descripcion);
 
     if ($stmt->execute()) {
         echo json_encode(['resultado' => 'OK', 'mensaje' => 'Datos grabados']);
@@ -28,4 +27,3 @@ try {
     echo json_encode(['resultado' => 'ERROR', 'mensaje' => 'Error en la base de datos: ' . $e->getMessage()]);
 }
 ?>
-
